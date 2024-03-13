@@ -43,7 +43,7 @@ export const Loading = () => {
                 console.log('Stored access token:', localStorage.getItem("accessToken"));
             
                 // Delay the navigation until after the access token is saved
-                navigate("/");
+                //navigate("/");
               } catch (error) {
                 console.error('Error saving access token:', error);
               }
