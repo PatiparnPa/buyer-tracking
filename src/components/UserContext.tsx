@@ -40,6 +40,7 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
           basketId: basketID, // Ensure consistency with the interface property name
           favoriteId: favorite_productID, // Ensure consistency with the interface property name
         });
+        console.log('decode', decodedToken);
         console.log("UserData", userData);
       } catch (error) {
         console.error("Error decoding access token:", error);

@@ -17,6 +17,8 @@ export const UserProfilePage = () => {
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
       navigate('/userlogin');
+    } else {
+      console.log('Access Token:', accessToken);
     }
   }, [navigate]);
 
