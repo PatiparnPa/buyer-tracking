@@ -52,7 +52,6 @@ export const HomePage = () => {
     if (!accessToken) {
       navigate('/userlogin');
     } else {
-      console.log('Access Token:', accessToken);
       
     }
   }, [navigate]);
