@@ -4,6 +4,7 @@ import Goback from "../assets/goback.png";
 import Redbin from "../assets/redbin.png";
 import Cart from "../assets/cart.jpg";
 import Logo from "../assets/logo.jpg";
+import { useUser } from "./UserContext";
 
 interface BasketItem {
   productID: string;
@@ -32,9 +33,7 @@ export const FavoriteMenus: React.FC = () => {
   const navigate = useNavigate();
   const [isManageMode, setIsManageMode] = useState(false);
   const [favoriteFoods, setFavoriteFoods] = useState<MenuItem[]>([]);
-  const userId = '650bd1a00638ec52b189cb6e'
-  const basketId = '65d41851de12ac5fdff1066c'
-  const favoriteId = '65bca8ca326487d502199ce3'
+  const {userId, basketId, favoriteId} = useUser()
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back
@@ -138,7 +137,6 @@ export const FavoriteMenus: React.FC = () => {
   useEffect(() => {
     const fetchFavoriteFoods = async () => {
       try {
-        const userId = "650bd1a00638ec52b189cb6e";
         const response = await fetch(
           `https://order-api-patiparnpa.vercel.app/favorite_products/user/${userId}`
         );

@@ -3,6 +3,7 @@ import Goback from "../assets/goback.png";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import GoNext from "../assets/yeet.jpg";
+import { useUser } from "./UserContext";
 
 interface StoreItem {
   productID: string;
@@ -34,7 +35,7 @@ export const MyCart = () => {
     {}
   );
   const [selectedOrders, setSelectedOrders] = useState<string[]>([]);
-  const basketId = '65d41851de12ac5fdff1066c';
+  const {userId, basketId, favoriteId} = useUser()
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back
@@ -77,7 +78,7 @@ export const MyCart = () => {
       });
 
       const basketUrl =
-        "https://order-api-patiparnpa.vercel.app/baskets/65d41851de12ac5fdff1066c";
+      `https://order-api-patiparnpa.vercel.app/baskets/${basketId}`;
       const response = await fetch(basketUrl, {
         method: "PUT",
         headers: {
@@ -104,7 +105,7 @@ export const MyCart = () => {
     const fetchBasketData = async () => {
       try {
         const response = await fetch(
-          "https://order-api-patiparnpa.vercel.app/baskets/65d41851de12ac5fdff1066c"
+          `https://order-api-patiparnpa.vercel.app/baskets/${basketId}`
         );
         if (response.ok) {
           const data = await response.json();

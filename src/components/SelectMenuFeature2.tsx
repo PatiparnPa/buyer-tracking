@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Goback from "../assets/goback.png";
 import { HeartButton } from "./Heartbutton";
+import { useUser } from "./UserContext";
 
 interface BasketItem {
   productID: string;
@@ -13,8 +14,7 @@ interface BasketItem {
 export const SelectMenuFeature2 = () => {
   const navigate = useNavigate();
   const { menuId } = useParams();
-  const userId = "650bd1a00638ec52b189cb6e";
-  const basketId = '65d41851de12ac5fdff1066c'
+  const {userId, basketId, favoriteId} = useUser()
   const [menuData, setMenuData] = useState({
     _id: "",
     name: "เมนู",
@@ -186,7 +186,7 @@ export const SelectMenuFeature2 = () => {
         </button>
         <div className="right-elements">
           <div className="elements-container">
-            <HeartButton menuId={menuId} userId={userId} />
+            <HeartButton menuId={menuId} />
           </div>
         </div>
       </div>

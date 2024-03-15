@@ -1,6 +1,7 @@
 import GoNext from "../assets/yeet.jpg";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useUser } from "./UserContext";
 
 interface Order {
   _id: string;
@@ -15,7 +16,7 @@ interface Order {
 }
 
 export const RecentOrder = () => {
-  const userId = "650bd1a00638ec52b189cb6e";
+  const {userId, basketId, favoriteId} = useUser()
   const [userOrders, setUserOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -86,7 +87,7 @@ export const RecentOrder = () => {
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      {!isLoading && userOrders.length === 0 && <div>User has no orders.</div>}
+      {!isLoading && userOrders.length === 0 && <div style={{textAlign:'center'}}>User has no orders.</div>}
       {!isLoading && userOrders.length > 0 && (
         <>
           <div className="custom-heading">On Process</div>

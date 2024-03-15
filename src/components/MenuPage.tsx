@@ -4,6 +4,7 @@ import Goback from "../assets/goback.png";
 import Cart from "../assets/cart.jpg";
 import Logo from "../assets/logo.jpg";
 import { useParams } from "react-router-dom";
+import { useUser } from "./UserContext";
 
 interface Menu {
   _id: string;
@@ -29,8 +30,7 @@ export const MenuPage = () => {
   const location = useLocation();
   const [menuData, setMenuData] = useState<Menu[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const userId = "650bd1a00638ec52b189cb6e";
-  const basketId = '65d41851de12ac5fdff1066c'
+  const {userId, basketId, favoriteId} = useUser()
 
   const { storeId } = useParams();
 

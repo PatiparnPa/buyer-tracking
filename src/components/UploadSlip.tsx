@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import Goback from "../assets/goback.png";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
+import { useUser } from "./UserContext";
 
 interface StoreDetail {
   qr_img_url: string;
@@ -10,8 +12,11 @@ interface StoreDetail {
 
 export const UploadSlip = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { storeId } = useParams<{ storeId: string }>();
+  const { orderId } = location.state || {};
   const [storeDetail, setStoreDetail] = useState<StoreDetail | null>(null);
+  const { userId, basketId, favoriteId } = useUser();
 
   useEffect(() => {
     const fetchStoreDetail = async () => {
@@ -88,7 +93,7 @@ export const UploadSlip = () => {
   
 
   const handleUpload = () => {
-    navigate('/slip2');
+    navigate('/slip2', { state: { storeId: storeId, orderId: orderId } });
   };
   return (
     <>

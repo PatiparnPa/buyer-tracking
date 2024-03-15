@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import MyAppBar from "./AppBar";
 import TabBar from "./Tabbar";
 import Cart from "../assets/cart.jpg";
+import { useUser } from "./UserContext";
 
 type Store = {
   _id: string;
@@ -44,8 +45,7 @@ export const HomePage = () => {
   const location = useLocation();
   const [stores, setStores] = useState<Store[]>([]);
   const [favoriteFoods, setFavoriteFoods] = useState<MenuItem[]>([]);
-  const userId = '650bd1a00638ec52b189cb6e'
-  const basketId = '65d41851de12ac5fdff1066c'
+  const {userId, basketId, favoriteId} = useUser()
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -153,7 +153,6 @@ const addToCart = async (menuItem: MenuItem) => {
   useEffect(() => {
     const fetchFavoriteFoods = async () => {
       try {
-        const userId = "650bd1a00638ec52b189cb6e";
         const response = await fetch(
           `https://order-api-patiparnpa.vercel.app/favorite_products/user/${userId}`
         );

@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import Goback from "../assets/goback.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useUser } from "./UserContext";
 
 interface Item {
   orderDetail: string;
@@ -16,8 +17,7 @@ export const ConfirmOrder: React.FC = () => {
   const navigate = useNavigate();
   const { storeId } = useParams<{ storeId: string }>();
   const location = useLocation();
-  const userId = "650bd1a00638ec52b189cb6e";
-  const basketId = "65d41851de12ac5fdff1066c";
+  const {userId, basketId, favoriteId} = useUser()
   const [selectedMethod, setSelectedMethod] = useState("payAtStore");
 
   const handleMethodChange = (event: ChangeEvent<HTMLInputElement>) => {

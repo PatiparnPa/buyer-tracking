@@ -138,7 +138,7 @@ export const OrderDetail = () => {
 
   const handleClick = () => {
     if (orderDetail) {
-      navigate(`/slip/${orderDetail.storeID}`);
+      navigate(`/slip/${orderDetail.storeID}`, { state: { orderId: orderId } });
     }
   };
 
