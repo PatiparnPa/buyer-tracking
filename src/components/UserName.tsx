@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import Goback from "../assets/goback.png";
 import { useState, useEffect } from "react";
+import { useUser } from "./UserContext";
 
 export const UserName = () => {
   const [newName, setNewName] = useState("");
-  const userId = "650bd1a00638ec52b189cb6e";
+  const {userId, basketId, favoriteId} = useUser()
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
