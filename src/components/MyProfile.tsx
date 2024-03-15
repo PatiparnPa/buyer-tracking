@@ -70,7 +70,7 @@ export const UserProfilePage = () => {
   
       // Remove access token from local storage
       localStorage.removeItem("accessToken");
-  
+      navigate('/userlogin');
       // Navigate to user login page
       console.log("Logout successful");
     } catch (error) {
