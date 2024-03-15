@@ -23,10 +23,8 @@ export const UserProfilePage = () => {
 
   const initializeLiff = async () => {
     try {
-      // Check if the web app is being accessed within the LINE app environment
-      if (liff.isInClient()) {
-        await liff.init({ liffId: "2000210581-wLmA5Enp" });
-      }
+      // Initialize LIFF
+      await liff.init({ liffId: "2000210581-wLmA5Enp" });
     } catch (error) {
       console.error("LIFF initialization failed:", error);
       // Handle the initialization error here, such as displaying an error message
@@ -64,13 +62,17 @@ export const UserProfilePage = () => {
 
   const handleLogout = () => {
     try {
+      // Check if the user is logged in
+      if (liff.isLoggedIn()) {
+        // Logout from LINE
+        liff.logout();
+      }
+  
       // Remove access token from local storage
       localStorage.removeItem("accessToken");
-      // Logout from LINE
-      liff.logout();
-
+  
       // Navigate to user login page
-      console.log("the logout is success");
+      console.log("Logout successful");
     } catch (error) {
       console.error("Error during logout:", error);
     }
