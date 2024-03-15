@@ -36,14 +36,9 @@ export const Loading = () => {
                 await localStorage.setItem("accessToken", accessTokenData.access_token);
 
             
-
-                console.log('accessTokenData:', accessTokenData);
-                
-                // Check if access token is stored properly
-                console.log('Stored access token:', localStorage.getItem("accessToken"));
-            
                 // Delay the navigation until after the access token is saved
                 navigate("/");
+                window.location.reload();
               } catch (error) {
                 console.error('Error saving access token:', error);
               }
@@ -113,6 +108,7 @@ export const Loading = () => {
                       const accessTokenData = await accessTokenResponse.json();
                       await localStorage.setItem("accessToken", accessTokenData.access_token);
                       navigate("/");
+                      window.location.reload();
                     } else {
                       throw new Error("Failed to fetch access token");
                     }
