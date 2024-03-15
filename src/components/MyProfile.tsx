@@ -6,9 +6,10 @@ import GoNext from "../assets/yeet.jpg";
 import React, { useEffect, useState } from "react";
 import { UserName } from "./UserName";
 import liff from "@line/liff"; // Import LIFF library
+import { useUser } from "./UserContext";
 
 export const UserProfilePage = () => {
-  const userId = "650bd1a00638ec52b189cb6e";
+  const {userId, basketId, favoriteId} = useUser()
   const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 

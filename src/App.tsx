@@ -22,7 +22,7 @@ import { usePopup } from "./components/PopupContext";
 import Pot from "./assets/pot-removebg-preview.png";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "./components/Loading";
-import AuthenticatedRoute from "./AuthenticatedRoute";
+import { useUser } from "./components/UserContext";
 
 // Define the Order interface
 interface Order {
@@ -35,8 +35,8 @@ interface Order {
 }
 
 function App() {
-  const userId = "650bd1a00638ec52b189cb6e";
   const { isPopupOpen, openPopup, closePopup } = usePopup();
+  const {userId, basketId, favoriteId} = useUser()
 
   const navigate = useNavigate();
 

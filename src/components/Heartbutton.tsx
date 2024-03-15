@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import Heart from "../assets/heart-removebg-preview.png";
 import Heart2 from "../assets/heart-removebg-preview-removebg-preview.png";
+import { useUser } from "./UserContext";
 
 type HeartButtonProps = {
   menuId?: string;
-  userId: string;
 };
 
-export const HeartButton: React.FC<HeartButtonProps> = ({ menuId, userId }) => {
+export const HeartButton: React.FC<HeartButtonProps> = ({ menuId}) => {
+  const {userId, basketId, favoriteId} = useUser()
   const [isHeartActive, setIsHeartActive] = useState(false);
   const [favoriteMenuId, setFavoriteMenuId] = useState<string | undefined>(undefined);
   const [userFavoriteProductIDs, setUserFavoriteProductIDs] = useState<string[]>([]);

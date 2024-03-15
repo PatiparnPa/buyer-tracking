@@ -4,6 +4,7 @@ import Logo from "../assets/logo.jpg";
 import Goback from "../assets/goback.png";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useUser } from "./UserContext";
 
 interface BasketItem {
   productID: string;
@@ -17,8 +18,7 @@ export const SelectMenuFeature = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [quantity, setQuantity] = useState(1);
-  const userId = "650bd1a00638ec52b189cb6e";
-  const basketId = '65d41851de12ac5fdff1066c'
+  const {userId, basketId, favoriteId} = useUser()
   const {storeId} = useParams();
   const [menuData, setMenuData] = useState({
     _id: "",
