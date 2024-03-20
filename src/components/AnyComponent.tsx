@@ -22,10 +22,12 @@ const AnyComponent: React.FC = () => {
         "https://api.slipok.com/api/line/apikey/18131",
         {
           url: imageUrl,
+          log: true,
         },
         {
           headers: {
             "x-authorization": "SLIPOK8H819O3",
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -38,7 +40,9 @@ const AnyComponent: React.FC = () => {
     }
   };
 
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
