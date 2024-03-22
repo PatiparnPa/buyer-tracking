@@ -1,69 +1,58 @@
-// AnyComponent.tsx
-import { usePopup } from "./PopupContext";
-import PopupComponent from "./PopupComponent";
 import { useState } from "react";
-import React, { useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-import { useUser } from "./UserContext";
-import axios from "axios";
 
 const AnyComponent: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const handleImageUpload = async () => {
-    if (!imageUrl) {
-      console.error("Image URL is not available.");
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      setImageFile(files[0]);
+    }
+  };
+
+  const handleUploadImage = async () => {
+    if (!imageFile) {
+      console.error("No image selected.");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "https://api.slipok.com/api/line/apikey/18131",
+      const formData = new FormData();
+      formData.append("img", imageFile);
+
+      const response = await fetch(
+        "https://upload2firebase.vercel.app/upload",
         {
-          url: imageUrl,
-          log: true,
-        },
-        {
-          headers: {
-            "x-authorization": "SLIPOK8H819O3",
-            'Content-Type': 'application/json',
-          },
+          method: "POST",
+          body: formData,
         }
       );
 
-      // Handle response here, check if the slip is valid or not
-      console.log("Slip checking response:", response.data);
-    } catch (error) {
-      console.error("Error uploading slip:", error);
-      // Handle error
-    }
-  };
+      if (!response.ok) {
+        throw new Error(`Failed to upload image: ${response.statusText}`);
+      }
 
-  const handleFileInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      setImageFile(file);
+      // Check if the response content type is JSON
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const responseData = await response.json();
+        console.log("Response from server:", responseData);
+        console.log("Response from server:", response);
+      } else {
+        // If response is not JSON, log the response text
+        const responseText = await response.text();
+        console.log("Response from serverrrrrrrrrrrr:", responseText);
+        console.log("Response from server:", response);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
     }
   };
 
   return (
     <div>
-      <input type="file" onChange={handleFileInputChange} accept="image/*" />
-      {imageFile && (
-        <div>
-          <h2>Selected Image:</h2>
-          <img src={imageUrl || ""} alt="Selected Image" />
-        </div>
-      )}
-      <button onClick={handleImageUpload}>Upload Slip</button>
+      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <button onClick={handleUploadImage}>Upload Image</button>
     </div>
   );
 };
