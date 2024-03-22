@@ -16,7 +16,7 @@ interface Order {
 }
 
 export const RecentOrder = () => {
-  const {userId, basketId, favoriteId} = useUser()
+  const { userId, basketId, favoriteId } = useUser();
   const [userOrders, setUserOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -80,14 +80,19 @@ export const RecentOrder = () => {
     fetchUserOrders();
   }, [userId]);
 
-  // Filter orders based on their status
-  const onProcessOrders = userOrders.filter((order) => order.status === "open");
-  const recentOrders = userOrders.filter((order) => order.status !== "open");
-
+  const reversedUserOrders = [...userOrders].reverse();
+  const onProcessOrders = reversedUserOrders.filter(
+    (order) => order.status === "open"
+  );
+  const recentOrders = reversedUserOrders.filter(
+    (order) => order.status !== "open"
+  );
   return (
     <>
       {isLoading && <div>Loading...</div>}
-      {!isLoading && userOrders.length === 0 && <div style={{textAlign:'center'}}>User has no orders.</div>}
+      {!isLoading && userOrders.length === 0 && (
+        <div style={{ textAlign: "center" }}>User has no orders.</div>
+      )}
       {!isLoading && userOrders.length > 0 && (
         <>
           <div className="custom-heading">On Process</div>
