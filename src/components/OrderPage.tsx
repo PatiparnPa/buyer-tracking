@@ -3,7 +3,6 @@ import TabBar from "./Tabbar";
 import Cart2 from "../assets/cart2.png";
 import { RecentOrder } from "./RecentOrder";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 
 const OrderPage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,13 +10,6 @@ const OrderPage: React.FC = () => {
   const handleCartClick = () => {
     navigate('/mycart');
   };
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-      navigate('/userlogin');
-    }
-  }, [navigate]);
   return (
     <div>
       <div

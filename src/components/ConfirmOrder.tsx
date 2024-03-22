@@ -17,7 +17,7 @@ export const ConfirmOrder: React.FC = () => {
   const navigate = useNavigate();
   const { storeId } = useParams<{ storeId: string }>();
   const location = useLocation();
-  const {userId, basketId, favoriteId} = useUser()
+  const { userId, basketId, favoriteId } = useUser();
   const [selectedMethod, setSelectedMethod] = useState("payAtStore");
 
   const handleMethodChange = (event: ChangeEvent<HTMLInputElement>) => {

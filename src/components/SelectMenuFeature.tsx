@@ -18,7 +18,7 @@ export const SelectMenuFeature = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [quantity, setQuantity] = useState(1);
-  const {userId, basketId, favoriteId} = useUser()
+  const { userId, basketId, favoriteId } = useUser();
   const {storeId} = useParams();
   const [menuData, setMenuData] = useState({
     _id: "",

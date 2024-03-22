@@ -13,8 +13,7 @@ export const UploadSlip2 = () => {
   const { userId, basketId, favoriteId } = useUser();
   const [message, setMessage] = useState(""); // State to hold message
   const [imageUrl, setImageUrl] = useState("");
-  const imgUrl =
-    "https://order-tracking-eiei.s3.ap-southeast-1.amazonaws.com/012.jpg";
+  
 
   const compareStrings = (str1: string, str2: string): boolean => {
     // Preprocess strings to remove prefixes
@@ -91,7 +90,7 @@ export const UploadSlip2 = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            url: imgUrl,
+            url: imageUrl,
           }),
         }
       );
@@ -145,7 +144,7 @@ export const UploadSlip2 = () => {
                   user_id: userId,
                   order_id: orderId,
                   payment_status: "success",
-                  slip_url: imgUrl,
+                  slip_url: imageUrl,
                 }),
               }
             );

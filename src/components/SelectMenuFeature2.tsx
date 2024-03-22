@@ -14,7 +14,7 @@ interface BasketItem {
 export const SelectMenuFeature2 = () => {
   const navigate = useNavigate();
   const { menuId } = useParams();
-  const {userId, basketId, favoriteId} = useUser()
+  const { userId, basketId, favoriteId } = useUser();
   const [menuData, setMenuData] = useState({
     _id: "",
     name: "เมนู",

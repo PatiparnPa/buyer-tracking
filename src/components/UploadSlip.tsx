@@ -42,7 +42,7 @@ export const UploadSlip = () => {
     navigate(-1); // Navigate back
   };
 
-  const qrCodeUrl = storeDetail?.store_img_url || ''; // Use the fetched qr_img_url
+  const qrCodeUrl = storeDetail?.qr_img_url || ''; // Use the fetched qr_img_url
 
   const handleSave = async () => {
     try {
