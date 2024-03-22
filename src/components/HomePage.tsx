@@ -5,7 +5,6 @@ import TabBar from "./Tabbar";
 import Cart from "../assets/cart.jpg";
 import { useUser } from "./UserContext";
 
-
 type Store = {
   _id: string;
   name: string;
@@ -46,8 +45,16 @@ export const HomePage = () => {
   const location = useLocation();
   const [stores, setStores] = useState<Store[]>([]);
   const [favoriteFoods, setFavoriteFoods] = useState<MenuItem[]>([]);
-  const { userId, basketId, favoriteId } = useUser();
+  const {userId, basketId, favoriteId} = useUser()
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      navigate('/userlogin');
+    } else {
+      
+    }
+  }, [navigate]);
   // Function to add a menu item to the cart
 const addToCart = async (menuItem: MenuItem) => {
   try {

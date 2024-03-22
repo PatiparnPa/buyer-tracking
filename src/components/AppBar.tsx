@@ -14,7 +14,10 @@ const MyAppBar = () => {
       style={{ position: "fixed", top: 0, width: "100%", zIndex: 1000 }}
     >
       <h5 style={{ marginTop: "3%", marginLeft: "3%", fontWeight: "500" }}>
-        <Link style={{ textDecoration: "none", color: "inherit" }} to="/yee">
+        <Link
+          style={{ textDecoration: "none", color: "inherit" }}
+          to="/yee"
+        >
           IT CAFETERIA
         </Link>
       </h5>

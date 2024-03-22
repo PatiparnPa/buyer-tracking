@@ -7,11 +7,11 @@ type HeartButtonProps = {
   menuId?: string;
 };
 
-export const HeartButton: React.FC<HeartButtonProps> = ({ menuId }) => {
+export const HeartButton: React.FC<HeartButtonProps> = ({ menuId}) => {
+  const {userId, basketId, favoriteId} = useUser()
   const [isHeartActive, setIsHeartActive] = useState(false);
   const [favoriteMenuId, setFavoriteMenuId] = useState<string | undefined>(undefined);
   const [userFavoriteProductIDs, setUserFavoriteProductIDs] = useState<string[]>([]);
-  const { userId, basketId, favoriteId } = useUser();
 
   useEffect(() => {
     let isMounted = true;

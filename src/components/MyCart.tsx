@@ -35,7 +35,7 @@ export const MyCart = () => {
     {}
   );
   const [selectedOrders, setSelectedOrders] = useState<string[]>([]);
-  const { userId, basketId, favoriteId } = useUser();
+  const {userId, basketId, favoriteId} = useUser()
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back
@@ -44,6 +44,13 @@ export const MyCart = () => {
   const handleManageClick = () => {
     setIsManageMode(!isManageMode);
   };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      navigate('/userlogin');
+    }
+  }, [navigate]);
 
   const manageButtonStyles = {
     background: "none",

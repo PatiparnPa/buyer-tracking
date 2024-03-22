@@ -5,7 +5,7 @@ import { useUser } from "./UserContext";
 
 export const UserName = () => {
   const [newName, setNewName] = useState("");
-  const { userId, basketId, favoriteId } = useUser();
+  const {userId, basketId, favoriteId} = useUser()
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
