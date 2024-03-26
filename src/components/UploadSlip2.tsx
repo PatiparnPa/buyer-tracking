@@ -13,6 +13,7 @@ export const UploadSlip2 = () => {
   const { userId, basketId, favoriteId } = useUser();
   const [message, setMessage] = useState(""); // State to hold message
   const [imageUrl, setImageUrl] = useState("");
+  const [error, setError] = useState<string>("");
   
 
   const compareStrings = (str1: string, str2: string): boolean => {
@@ -47,22 +48,31 @@ export const UploadSlip2 = () => {
     return str.trim(); // Trim any leading or trailing whitespace
   };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement && inputElement.files && inputElement.files.length > 0) {
-      const file = inputElement.files[0];
-      // Now you can safely use the 'file' variable
-      console.log("Selected file:", file);
 
-      // Read the selected file and set it to imageUrl state
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageUrl(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-      console.log("image:", imageUrl);
-    } else {
-      console.error("No file selected");
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+
+      try {
+        const formData = new FormData();
+        formData.append("img", file);
+
+        const response = await fetch("https://upload2firebase.vercel.app/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to upload image: ${response.statusText}`);
+        }
+
+        const imageUrl = await response.text();
+        setImageUrl(imageUrl);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        setError("Failed to upload image. Please try again.");
+      }
     }
   };
 
@@ -279,12 +289,13 @@ export const UploadSlip2 = () => {
         <input
           type="file"
           id="fileInput"
-          onChange={handleFileChange}
+          onChange={handleImageUpload}
           style={{ display: "none" }}
         />
         <div style={{ fontSize: "18px", fontWeight: "bold" }}>
           Please upload your payment slip
         </div>
+        {error && <p className="error-message">{error}</p>}
         <div style={{ padding: "10px" }}>{message}...</div>
       </div>
       <div
