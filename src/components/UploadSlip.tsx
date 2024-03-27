@@ -54,6 +54,8 @@ export const UploadSlip = () => {
   
         // Create a canvas element
         const canvas = document.createElement('canvas');
+  
+        // Get the 2D context of the canvas
         const context = canvas.getContext('2d');
   
         if (context) {
@@ -87,6 +89,7 @@ export const UploadSlip = () => {
       console.error('Error saving image:', error);
     }
   };
+  
   
   
   
@@ -128,7 +131,7 @@ export const UploadSlip = () => {
         </div>
       </div>
       <div className='upload-slip-container'>
-        <img id="qrCodeImage" src={qrCodeUrl} alt="Seller QR Code" style={{ width: "100%", padding:'10px', maxHeight:'400px' }} />
+        <img id="qrCodeImage" src={qrCodeUrl} alt="Seller QR Code" style={{ width: "100%", padding:'10px' }} />
         <button
           onClick={handleSave}
           style={{
