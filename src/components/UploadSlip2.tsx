@@ -121,7 +121,6 @@ export const UploadSlip2 = () => {
         const displayName = responseData.data.receiver.displayName;
         const isSimilar = compareStrings(ownerName, displayName);
         if (
-          responseData.data.receivingBank === storeData.bank_name &&
           isSimilar
         ) {
           console.log("Bank name and owner name match with store data");
