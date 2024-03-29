@@ -185,6 +185,7 @@ export const UploadSlip2 = () => {
                   updateOrderData
                 );
                 setMessage("Payment status of the order updated successfully");
+                navigate('/order');
               } else {
                 console.error(
                   "Failed to update payment status of the order:",
